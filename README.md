@@ -1,5 +1,6 @@
-Crear una base de datos manual mente con el nombre de Prueba_Usuario, compilar el backend con el comando "npm run dev" y el frontend con este otro comando "npm start"
-
+Cómo configurar y ejecutar el proyecto
+Crear una base de datos manual mente con el nombre de Prueba_Usuario, compilar el backend con el comando "npm run dev" y el frontend con este otro comando "npm start".
+En el backend en el .env esta las variable para la conexion a la base, se trabajo con PostgreSQL 16 y en el Frontend en src/api/axios se configura la direccion de con el puerto el backend.
 
 Frameworks y Blibliotecas de backend
 express 
