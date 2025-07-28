@@ -2,11 +2,11 @@ const pool = require('../config/db');
 
 class User {
   static async create(user) {
-    const { firstName, lastName, email, phoneNumber, role, status, address, password } = user;
+    const { firstName, lastName, email, phoneNumber, role, status, address, password, profilePicture } = user;
     const { rows } = await pool.query(
-      `INSERT INTO users (first_name, last_name, email, phone_number, role, status, address, password) 
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-      [firstName, lastName, email, phoneNumber, role, status, address, password]
+      `INSERT INTO users (first_name, last_name, email, phone_number, role, status, address, password, profile_picture) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+      [firstName, lastName, email, phoneNumber, role, status, address, password, profilePicture]
     );
     return rows[0];
   }

@@ -55,9 +55,9 @@ async function seedDatabase() {
 
       const admin = await createUser(true);
       await pool.query(
-        `INSERT INTO users (first_name, last_name, email, phone_number, role, status, address, password)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
-        [admin.firstName, admin.lastName, admin.email, admin.phoneNumber, admin.role, admin.status, admin.address, admin.password]
+        `INSERT INTO users (first_name, last_name, email, phone_number, role, status, address, password, profile_picture)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+        [admin.firstName, admin.lastName, admin.email, admin.phoneNumber, admin.role, admin.status, admin.address, admin.password, admin.profilePicture]
       );
       
     }

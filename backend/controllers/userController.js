@@ -13,7 +13,9 @@ exports.createUser = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: 'Email already in use' });
     }
-    
+    const profile = req.file ? 
+      `/uploads/${req.file.filename}` : 
+      '/uploads/Foto_def.png';
     
     const hashedPassword = await bcrypt.hash(password, 10);
     
@@ -26,7 +28,7 @@ exports.createUser = async (req, res) => {
       status,
       address,
       password: hashedPassword,
-      profilePicture: req.file ? `/uploads/${req.file.filename}` : null
+      profilePicture:profile
     });
     
     res.status(201).json(user);
@@ -73,7 +75,7 @@ exports.updateUser = async (req, res) => {
     }
 
     if (req.file) {
-      updates.profilePicture = `/uploads/${req.file.filename}`;
+      updates.profile_picture = `/uploads/${req.file.filename}`;
     }
     
     const updatedUser = await User.update(id, updates);
@@ -101,5 +103,21 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
+  }
+};
+exports.getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const user = await User.findById(id);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error del servidor' });
   }
 };
